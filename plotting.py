@@ -4,7 +4,12 @@ import matplotlib
 import h5py
 
 
-def plot_EOS(filename_CO):
+def plot_EOS(filename_CO,T=0.1):
+    """
+    filename_CO, str, name of .h5 file data is loaded from. This file
+    must be the output of convert
+    T, float, temperature to plot at in MeV, default 0.1
+    """
     f2 = h5py.File(filename_CO, 'r')
 
     keys2 = list(f2.keys())
@@ -18,7 +23,7 @@ def plot_EOS(filename_CO):
         CO_EOS.append(np.array(f2.get(keys2[i])))
     
     #Get the closest entry in the temperature that corresponds to 0.1 MeV
-    T_target=0.1
+    T_target=T
 
     Tcold_index_CO=list(10.**CO_EOS[keys2.index('logtemp')]-T_target).index(np.min(np.abs(10.**CO_EOS[keys2.index('logtemp')] - T_target)))
 
