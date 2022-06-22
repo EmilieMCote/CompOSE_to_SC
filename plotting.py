@@ -1,17 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np
-from matplotlib import rc
-import scipy.constants as const
-from scipy.optimize import root as root
-from scipy.special import sph_harm
 import matplotlib
-from matplotlib import rcParams
-import pylab
-import os
-from scipy.interpolate import griddata
 import h5py
-import scipy as sp
-import warnings
 
 
 def plot_EOS(filename_CO):
