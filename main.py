@@ -7,6 +7,18 @@ import os
 import warnings
 
 def conv_h5(filename,new_file):
+    """Convert H5
+
+    Convert an H5 file from the CompOSE format to the stellarcollapse format
+
+    Args:
+        filename (str): input file in CompOSE format
+        new_file (str): output file in stellarcollapse format
+
+    Returns:
+        None
+    
+    """
     if os.path.exists(new_file):
         os.remove(new_file)
 
