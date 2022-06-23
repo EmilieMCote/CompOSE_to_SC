@@ -4,8 +4,16 @@ import matplotlib
 import h5py
 
 def shorten_str(s,max_len=10):
-    """
-    shorten string to make it more readable
+    """Shorten string
+
+    Shorten a string to make it easier to read when printed
+
+    Args:
+        s (str): string. Original text to be shortened
+        max_len (int): integer. Maximum length of the string to return. Default = 10
+
+    Returns:
+        str: shortened string
     """
     if len(s) <= max_len:
         return s
@@ -14,8 +22,16 @@ def shorten_str(s,max_len=10):
         return s[:l] + '...' + s[-1*l:]
 
 def shorten_path(path,max_len=10):
-    """
-    shorten the path to make it more readable
+    """ Shorten path string
+
+    Shorten a path string to make it easier to read when printed
+
+    Args:
+        path (str): string. Original path to be shortened
+        max_len (int): integer. Maximum length of each dir to return. Default = 10
+
+    Returns:
+        str: shortened path
     """
     components = path.split('/')
     filename = components[-1]
@@ -29,11 +45,17 @@ def shorten_path(path,max_len=10):
     return s
 
 def plot_EOS(filenames,T=0.1,verbose=False):
-    """
-    filename_CO, str, name of .h5 file data is loaded from. This file
-    must be the output of convert
-    T, float, temperature to plot at in MeV, default 0.1
-    verbose, bool, print keywords
+    """Plot equation of state
+
+    Plot the equation of state described by various .h5 files in the stellarcollapse format
+
+    Args:
+        filenames (array): list or array of strings. These are the paths to .h5 files to be plotted
+        T (float): Temperature to plot at in MeV. Default = 0.1
+        verbose (bool): Switch to turn on print statements during run
+
+    Returns:
+        plt.Figure: Figure to be plotted
     """
     #make a figure of size 15,10 with 2 rows and 3 columns
     plt.style.use('seaborn-colorblind')
