@@ -11,6 +11,7 @@ Welcome to CompOSE_to_SC's documentation!
    :caption: Contents:
    
    plotting.rst
+
    conversion.rst
 
 
