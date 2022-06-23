@@ -3,6 +3,30 @@ import numpy as np
 import matplotlib
 import h5py
 
+def shorten_str(s,max_len=10):
+    """
+    shorten string to make it more readable
+    """
+    if len(s) <= max_len:
+        return s
+    else:
+        l = (max_len-3)//2
+        return s[:l] + '...' + s[-1*l:]
+
+def shorten_path(path,max_len=10):
+    """
+    shorten the path to make it more readable
+    """
+    components = path.split('/')
+    filename = components[-1]
+    dirs = components[:-1]
+    if len(dirs) > 2:
+        dirs = [dirs[0],dirs[-1]]
+    s = ''
+    for dir in dirs:
+        s = s + shorten_str(dir,max_len=max_len) + '/'
+    s = s + shorten_str(filename,max_len=max_len)
+    return s
 
 def plot_EOS(filenames,T=0.1,verbose=False):
     """
@@ -12,6 +36,8 @@ def plot_EOS(filenames,T=0.1,verbose=False):
     verbose, bool, print keywords
     """
     #make a figure of size 15,10 with 2 rows and 3 columns
+    plt.style.use('seaborn-colorblind')
+
     fig, ax= plt.subplots(nrows=3, ncols=4,figsize=(11,7), tight_layout=True)
     #define the subplot for this figure, we are only doing one subplot for now
     #set the value of the line width and font size
@@ -19,7 +45,8 @@ def plot_EOS(filenames,T=0.1,verbose=False):
     universal_fontsize=11
     
     fig.suptitle("EOS Variables wrt restmass density Corresponding to Beta-Equilibrium")
-
+    if isinstance(filenames, str):
+        filenames = [filenames]
     for filename_CO in filenames:
         f2 = h5py.File(filename_CO, 'r')
 
@@ -82,20 +109,18 @@ def plot_EOS(filenames,T=0.1,verbose=False):
             cs2_CO.append(CO_EOS[keys2.index('cs2')][Yebeta_index_CO][Tcold_index_CO][rho_index])
     
         #SECOND EOS PLOTS
-        ax[0][0].plot(logRho_CO, Yebeta_CO, color='pink')
-        ax[0][1].plot(logRho_CO, logPressbeta_CO, color='skyblue')
-        ax[0][2].plot(logRho_CO, logEnergybeta_CO, color='lightgreen')
-        ax[0][3].plot(logRho_CO, dedt_CO, color='pink')
-        #ax[1][0].semilogy(logRho_CO, dpderho_CO, color='pink')
-        ax[1][0].plot(logRho_CO, dpderho_CO, color='pink')
-        #ax[1][1].semilogy(logRho_CO, dpdrhoe_CO, color='skyblue')
-        ax[1][1].plot(logRho_CO, dpdrhoe_CO, color='skyblue')
-        ax[1][2].plot(logRho_CO, mu_e_CO, color='lightgreen')
-        ax[1][3].plot(logRho_CO, mu_n_CO, color='pink')
-        ax[2][0].plot(logRho_CO, mu_p_CO, color='pink')
-        ax[2][1].plot(logRho_CO, entropy_CO, color='skyblue')
-        ax[2][2].plot(logRho_CO, cs2_CO, color='lightgreen')
-        
+        ax[0][0].plot(logRho_CO, Yebeta_CO)
+        ax[0][1].plot(logRho_CO, logPressbeta_CO)
+        ax[0][2].plot(logRho_CO, logEnergybeta_CO)
+        ax[0][3].plot(logRho_CO, dedt_CO)
+        ax[1][0].plot(logRho_CO, dpderho_CO)
+        ax[1][1].plot(logRho_CO, dpdrhoe_CO)
+        ax[1][2].plot(logRho_CO, mu_e_CO)
+        ax[1][3].plot(logRho_CO, mu_n_CO)
+        ax[2][0].plot(logRho_CO, mu_p_CO)
+        ax[2][1].plot(logRho_CO, entropy_CO)
+        ax[2][2].plot(logRho_CO, cs2_CO,label=shorten_path(filename_CO,20))
+
     ax[0][0].set_xlabel(r'$\log(\rho \rm{ (g/cm^3)})$', fontsize=universal_fontsize)
     ax[0][0].set_ylabel(r'$Y_{e}^\beta$', fontsize=universal_fontsize)
     ax[0][1].set_xlabel(r'$\log(\rho \rm{ (g/cm^3)})$', fontsize=universal_fontsize)
@@ -119,6 +144,11 @@ def plot_EOS(filenames,T=0.1,verbose=False):
     ax[2][2].set_xlabel(r'$\log(\rho \rm{ (g/cm^3)})$', fontsize=universal_fontsize)
     ax[2][2].set_ylabel(r'$c^2$', fontsize=universal_fontsize)
     ax[2][3].axis('off')
+
+    handles, labels = ax[2][2].get_legend_handles_labels()
+
+    ax[2][3].legend(handles, labels, prop=dict(size=universal_fontsize))
+
 
     return fig
 
