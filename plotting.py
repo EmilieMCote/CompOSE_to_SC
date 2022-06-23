@@ -37,7 +37,7 @@ def shorten_path(path,max_len=10):
     filename = components[-1]
     dirs = components[:-1]
     if len(dirs) > 2:
-        dirs = [dirs[0],dirs[-1]]
+        dirs = [dirs[0],'...',dirs[-1]]
     s = ''
     for dir in dirs:
         s = s + shorten_str(dir,max_len=max_len) + '/'
