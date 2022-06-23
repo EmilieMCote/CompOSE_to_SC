@@ -1,4 +1,4 @@
-import numpy as np
+from numpy import sqrt, pi
 
 GNewton = 6.67408e-11       #Gravitational constant in SI
 GNewton_cgs = 6.67408e-8    #Gravitational constant in cgs
@@ -20,7 +20,7 @@ Gc2_cgs = GNewton_cgs/clight_cgs**2
 convMsoltokm = Gc2
 convMsoltokg = 1.989e30
 convkmtos = 1./(clight*1e-3)
-convkmtoinvGauss = np.sqrt(permittivity*GNewton/clight**2)*1e3*1e-4
+convkmtoinvGauss = sqrt(permittivity*GNewton/clight**2)*1e3*1e-4
 convinvkm2togpercm3=1e-10/Gc2_cgs
 convinvm2togpercm3=1e-10/Gc2_cgs*1e-6
 convcactustocgs_density=1./(convMsoltokm**2)*convinvkm2togpercm3
@@ -44,7 +44,7 @@ convkgtoGeV = 5.62e26
 convinvcmtoGeV = 1.98e-14
 convinvstoGeV = 6.58e-25
 convKtoGeV =8.62e-14
-convGeVtoinvFM = 0.0008065*(2*np.pi)*1e-3
+convGeVtoinvFM = 0.0008065*(2*pi)*1e-3
 convgtoGeV = 624.15
 convGeVtog = 1/624.15
 
