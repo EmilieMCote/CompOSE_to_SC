@@ -1,7 +1,7 @@
 import numpy as np
 import os
 import h5py
-from .ConstantsAndConversions import *
+from CompOSE_to_SC.ConstantsAndConversions import *
 from collections import OrderedDict
 import warnings
 
