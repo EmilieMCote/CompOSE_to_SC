@@ -3,7 +3,6 @@ import os
 import h5py
 from .ConstantsAndConversions import *
 from collections import OrderedDict
-import os
 import warnings
 
 def conv_h5(filename,new_file):
