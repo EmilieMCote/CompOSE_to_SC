@@ -23,9 +23,9 @@ def untar():
         None
     """
     with tarfile.open(dir_path+f1tar) as file:
+        file.extractall(dir_path+f1h5)
+    with tarfile.open(dir_path+f2tar) as file:
         file.extractall(dir_path)
-    with tarfile.open(dir_path) as file:
-        file.extractall(dir_path+f2h5)
 
 
 
