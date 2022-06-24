@@ -54,6 +54,24 @@ def test_plotting_single_blank(show = False):
     if show:
         fig.show()
 
+def test_plotting_single(filename = dir_path+f1h5,show = False):
+    """Test plotting from a 'blank' H5 file
+
+    Create a blank H5 file of all zeros and plot it
+
+    Args:
+        show (bool): whether to plot the figure
+
+    Returns:
+        None
+    
+    """
+    # create zero file
+    fig = plot_EOS(filename)
+    assert isinstance(fig,Figure)
+    if show:
+        fig.show()
+
 def test_plotting_len1_list_blank(show = False):
     """Test plotting from a 'blank' H5 file
 
