@@ -25,7 +25,7 @@ def untar(path):
     head,tail = split(path)
     file.extractall(head)
     file.close
-    return head+tail.split('.')[0] + '.h5'
+    return head+ '/' +tail.split('.')[0] + '.h5'
 
 
 def make_blank(filename):
