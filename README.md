@@ -11,3 +11,5 @@ https://compose.obspm.fr/table
 Find Documentation for CompOSE_to_SC on ReadTheDocs:
 
 https://compose-to-sc.readthedocs.io/en/latest/index.html
+
+[![A rectangular badge, half black half purple containing the text made at Code Astro](https://img.shields.io/badge/Made%20at-Code/Astro-blueviolet.svg)](https://semaphorep.github.io/codeastro/) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
