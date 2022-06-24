@@ -25,7 +25,7 @@ def untar(path):
     return head+ '/' +tail.split('.')[0] + '.h5'
 
 
-def test_plotting_single(filename = dir_path+f1tar,show = False):
+def test_plotting(url = None,filename = None,show = False,delete=True):
     """Test plotting from a 'blank' H5 file
 
     Create a blank H5 file of all zeros and plot it
@@ -37,10 +37,33 @@ def test_plotting_single(filename = dir_path+f1tar,show = False):
         None
     
     """
-    # untar files
-    outfile = untar(filename)
-    fig = plot_EOS(outfile)
-    system('rm %s' % outfile)
+    if not filename:
+        if not url:
+            raise ValueError('Please specify some way to access a file')
+        filename = download(url,'PracticeFiles/',True)
+    fig = plot_EOS(filename)
     assert isinstance(fig,Figure)
+    print('Single case worked')
     if show:
         fig.show()
+
+    fig = plot_EOS([filename])
+    assert isinstance(fig,Figure)
+    print('len=1 list case worked')
+    if show:
+        fig.show()
+
+    fig = plot_EOS([filename,filename])
+    assert isinstance(fig,Figure)
+    print('len=2 list case worked')
+    if show:
+        fig.show()
+
+    if delete:
+        system('rm %s' % filename)
+    
+    
+
+if __name__ == '__main__':
+    test_plotting(url='https://stellarcollapse.org/~evanoc/Hempel_TMAEOS_rho234_temp180_ye60_version_1.1_20120817.h5.bz2',
+    show=False,delete=True)
