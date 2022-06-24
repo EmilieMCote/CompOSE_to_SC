@@ -5,16 +5,27 @@ import h5py
 from matplotlib.figure import Figure
 import tarfile
 
-
 dir_path = '../PracticeFiles/'
 f1tar = 'eoscomposeBHBDD2L.tar.gz'
 f1h5 = f1tar.split('.')[0] + '.h5'
 f2tar = 'eoscomposeLS220.tar.gz'
 f2h5 = f2tar.split('.')[0] + '.h5'
-with tarfile.open(dir_path+f1tar) as file:
-    file.extractall(dir_path+f1h5)
-with tarfile.open(dir_path+f2tar) as file:
-    file.extractall(dir_path+f2h5)
+def untar():
+    """Untar practice files
+    
+    Decompress practice files for use in tests.
+    Please remove these files after they are created with
+    system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
+
+    Args:
+        None
+    Returns:
+        None
+    """
+    with tarfile.open(dir_path+f1tar) as file:
+        file.extractall(dir_path+f1h5)
+    with tarfile.open(dir_path+f2tar) as file:
+        file.extractall(dir_path+f2h5)
 
 
 
@@ -68,8 +79,10 @@ def test_plotting_single(filename = dir_path+f1h5,show = False):
         None
     
     """
-    # create zero file
+    # untar files
+    untar()
     fig = plot_EOS(filename)
+    system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
     assert isinstance(fig,Figure)
     if show:
         fig.show()
@@ -93,5 +106,3 @@ def test_plotting_len1_list_blank(show = False):
     assert isinstance(fig,Figure)
     if show:
         fig.show()
-
-system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
