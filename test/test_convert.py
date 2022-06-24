@@ -13,6 +13,11 @@ new_file = filename[:-3]+'_converted.h5'
 print(new_file)
 
 def test_conv_h5(filename, new_file):
+    '''
+    Makes sure the input file exists
+    Makes sure the input and output files are in h5 format
+    Makes sure the new file contains the right StellarCollapse list of keys
+    '''
     try:
         assert os.path.exists(filename), 'path for input file does not exist'
         assert filename[-3:]=='.h5', 'original file is not in h5 format'
@@ -37,9 +42,11 @@ def test_conv_h5(filename, new_file):
                 except AssertionError as msg:
                     print(msg)
                 else: 
-                    print('new file has proper Stellar Collapse keys')
+                    pass
 
-    
     
 test_conv_h5(filename, new_file)
 
+if __name__ == '__main__':
+   test_conv_h5(filename, new_file) 
+   
