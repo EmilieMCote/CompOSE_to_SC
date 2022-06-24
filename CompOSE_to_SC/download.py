@@ -1,5 +1,6 @@
 import wget
 import tarfile
+from os import system
 
 def untar(path):
     """Untar practice files
@@ -21,8 +22,13 @@ def untar(path):
 
 def download(url,untar_file = True):
     filename = url.split('/')[-1]
-    response = wget.download(url,filename)
+    new_path = '../PracticeFiles/'+filename
+    response = wget.download(url,new_path)
     if untar_file:
-        return untar(filename)
+        if filename.split('.')[-1] == 'bz2':
+            system('bzip2 -d %s' % new_path)
+            return new_path.split('.')[0] + '.h5'
+        else:
+            return untar(filename)
     else:
         return filename
