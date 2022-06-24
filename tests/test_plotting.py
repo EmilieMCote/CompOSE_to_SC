@@ -29,7 +29,7 @@ def make_blank(filename):
         None
     """
     infile = 'blank.h5'
-    with h5py.File(infile,'r') as blank:
+    with h5py.File(infile,'w') as blank:
         convert(infile, filename)
     # now remove blank
     system('rm %s' % infile)
