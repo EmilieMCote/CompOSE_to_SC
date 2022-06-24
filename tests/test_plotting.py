@@ -4,17 +4,17 @@ from os import system
 import h5py
 from matplotlib.figure import Figure
 
-# dir_path = '../PracticeFiles/'
-# f1tar = 'eoscomposeBHBDD2L.tar.gz'
-# f1h5 = f1tar.split('.')[0] + '.h5'
-# f2tar = 'eoscomposeLS220.tar.gz'
-# f2h5 = f2tar.split('.')[0] + '.h5'
-# with tarfile.open(dir_path+f1tar) as file:
-#     file.extractall(dir_path+f1h5)
-# with tarfile.open(dir_path+f2tar) as file:
-#     file.extractall(dir_path+f2h5)
+dir_path = '../PracticeFiles/'
+f1tar = 'eoscomposeBHBDD2L.tar.gz'
+f1h5 = f1tar.split('.')[0] + '.h5'
+f2tar = 'eoscomposeLS220.tar.gz'
+f2h5 = f2tar.split('.')[0] + '.h5'
+with tarfile.open(dir_path+f1tar) as file:
+    file.extractall(dir_path+f1h5)
+with tarfile.open(dir_path+f2tar) as file:
+    file.extractall(dir_path+f2h5)
 
-# system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
+
 
 def make_blank(filename):
     """Create blank H5 file
@@ -92,4 +92,4 @@ def test_plotting_len1_list_blank(show = False):
     if show:
         fig.show()
 
-    
+system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
