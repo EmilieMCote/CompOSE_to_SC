@@ -24,4 +24,5 @@ def download(url,untar_file = True):
     response = wget.download(url,filename)
     if untar_file:
         return untar(filename)
-    else return(filename)
+    else:
+        return filename
