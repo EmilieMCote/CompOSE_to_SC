@@ -4,29 +4,28 @@ from os import system
 import h5py
 from matplotlib.figure import Figure
 import tarfile
+from os.path import split
 
 dir_path = '../PracticeFiles/'
 f1tar = 'eoscomposeBHBDD2L.tar.gz'
-f1h5 = f1tar.split('.')[0] + '.h5'
 f2tar = 'eoscomposeLS220.tar.gz'
-f2h5 = f2tar.split('.')[0] + '.h5'
-def untar():
+def untar(path):
     """Untar practice files
     
     Decompress practice files for use in tests.
     Please remove these files after they are created with
-    system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
+    system('rm %s' % path)
 
     Args:
         None
     Returns:
         None
     """
-    with tarfile.open(dir_path+f1tar) as file:
-        file.extractall(dir_path+f1h5)
-    with tarfile.open(dir_path+f2tar) as file:
-        file.extractall(dir_path)
-
+    file =  tarfile.open(path)
+    head,tail = split(path)
+    file.extractall(head)
+    file.close
+    return head+tail.split('.')[0] + '.h5'
 
 
 def make_blank(filename):
@@ -67,7 +66,7 @@ def test_plotting_single_blank(show = False):
     if show:
         fig.show()
 
-def test_plotting_single(filename = dir_path+f1h5,show = False):
+def test_plotting_single(filename = dir_path+f1tar,show = False):
     """Test plotting from a 'blank' H5 file
 
     Create a blank H5 file of all zeros and plot it
@@ -80,9 +79,9 @@ def test_plotting_single(filename = dir_path+f1h5,show = False):
     
     """
     # untar files
-    untar()
-    fig = plot_EOS(filename)
-    system('rm %s %s' % (dir_path+f1h5,dir_path+f2h5))
+    outfile = untar(filename)
+    fig = plot_EOS(outfile)
+    system('rm %s' % outfile)
     assert isinstance(fig,Figure)
     if show:
         fig.show()
