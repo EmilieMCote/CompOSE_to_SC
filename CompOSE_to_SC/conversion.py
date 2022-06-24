@@ -132,7 +132,7 @@ def conv_h5(filename,new_file):
     P['Abar'] = Abar
     P['Xa'] = Xa
     P['Xh'] = Xh
-    P['Xn'] = Xn
+    #P['Xn'] = Xn
     P['Xp'] = Xp
     P['Zbar'] = Zbar
     print(P.keys())
@@ -157,7 +157,6 @@ def conv_h5(filename,new_file):
     P['pointsye'] = pointsye 
     P['ye'] = ye 
 
-    print(P.keys())
 
     for i in P:
         n.create_dataset(i, data=P[i], track_order=True)
