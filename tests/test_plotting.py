@@ -3,6 +3,8 @@ from CompOSE_to_SC.plotting import plot_EOS
 from os import system
 import h5py
 from matplotlib.figure import Figure
+import tarfile
+
 
 dir_path = '../PracticeFiles/'
 f1tar = 'eoscomposeBHBDD2L.tar.gz'
