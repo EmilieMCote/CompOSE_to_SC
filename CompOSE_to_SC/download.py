@@ -21,6 +21,19 @@ def untar(path):
     return head+ '/' +tail.split('.')[0] + '.h5'
 
 def download(url,new_path = './',untar_file = True):
+    """download practice files
+    
+    download practice files for use in tests.
+    Please remove these files after they are created with
+    system('rm %s' % path)
+
+    Args:
+        url (str): full url of file download link
+        new_path (str): desired path for file
+        untar_file (bool): True calls the untar function to decompress the file
+    Returns:
+        None
+    """
     filename = url.split('/')[-1]
     path = new_path+filename
     response = wget.download(url,path)

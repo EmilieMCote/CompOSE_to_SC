@@ -14,6 +14,7 @@ Welcome to CompOSE_to_SC's documentation!
 
    conversion.rst
 
+   download.rst
 
 Indices and tables
 ==================

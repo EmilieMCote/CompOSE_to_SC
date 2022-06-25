@@ -10,6 +10,16 @@ import shutil
 h5_files = []
 
 def look_for_test_file():
+    '''Looks for test files in the TestFiles directory.
+    If no files are found, LS220 is downloaded from 
+    stellarcollapse.org, decompressed and moved into the 
+    TestFiles directory.
+
+    Args:
+        None
+    Returns:
+        None 
+    '''
     for root, dir, files in os.walk('../PracticeFiles'):
         [h5_files.append(file) for file in files if file[-3:]=='.h5']
         print(h5_files)
@@ -18,7 +28,7 @@ def look_for_test_file():
     except AssertionError as msg:
         print(msg)
         dl('https://stellarcollapse.org/EOS/LS220_234r_136t_50y_analmu_20091212_SVNr26.h5.bz2')
-        [h5_files.append(files[0]) for root, dir, files in os.walk('.') if file[-3:]=='.h5']
+        [h5_files.append(files[0]) for root, dir, files in os.walk('.') if files[0][-3:]=='.h5']
         shutil.move('./LS220_234r_136t_50y_analmu_20091212_SVNr26.h5', '../PracticeFiles/LS220_234r_136t_50y_analmu_20091212_SVNr26.h5')
         print(h5_files)
 
@@ -28,6 +38,12 @@ def test_conv_h5():
     Makes sure the input file exists
     Makes sure the input and output files are in h5 format
     Makes sure the new file contains the right StellarCollapse list of keys
+    Tests the conv_h5 function using the first h5 file in the TestFiles directoy
+
+    Args:
+        None
+    Returns:
+        None 
     '''
     filename='../PracticeFiles/' + h5_files[0]
     new_file=filename[:-3]+'_converted.h5'
