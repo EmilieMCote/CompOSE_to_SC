@@ -5,6 +5,7 @@ import CompOSE_to_SC.conversion as conversion
 import CompOSE_to_SC.download as dl
 import h5py
 import os
+import shutil
 
 h5_files = []
 
@@ -17,8 +18,9 @@ def look_for_test_file():
     except AssertionError as msg:
         print(msg)
         dl('https://stellarcollapse.org/EOS/LS220_234r_136t_50y_analmu_20091212_SVNr26.h5.bz2')
-
-
+        [h5_files.append(files[0]) for root, dir, files in os.walk('.') if file[-3:]=='.h5']
+        shutil.move('./LS220_234r_136t_50y_analmu_20091212_SVNr26.h5', '../PracticeFiles/LS220_234r_136t_50y_analmu_20091212_SVNr26.h5')
+        print(h5_files)
 
 
 def test_conv_h5():
@@ -58,12 +60,7 @@ def test_conv_h5():
                     os.remove(new_file)
 
 
-    
-
-look_for_test_file()
-test_conv_h5()
-
 if __name__ == '__main__':
    look_for_test_file()
-   #test_conv_h5() 
+   test_conv_h5() 
    
